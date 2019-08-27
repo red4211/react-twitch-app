@@ -1,0 +1,57 @@
+.App {
+  text-align: center;
+  width: 1600px;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+body{
+  background: #0F0E11;
+  color:#fff;
+}
+
+.streams-list, .clips-list{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  padding: 0;
+  justify-content: space-around;
+}
+
+.streams-list li, .clips-list li{
+  flex-basis:480px;
+  color: rgb(218, 216, 222);;
+  margin-bottom: 30px;
+  text-align:left;
+}
+
+.streams-list li img{
+  display: block;
+  margin-bottom: 10px;
+}
+
+.title{
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 0;
+}
+
+.username{
+  margin-bottom: 10px;
+}
+.viewCount{ margin-top: 0; }
+
+.nav-button{
+  display: inline-block;
+  padding: 10px 20px;
+  background: #4B367C;
+  border:1px solid #fff;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  cursor:pointer;
+}
+
+.marg1{
+    margin: 0 18px;
+}
