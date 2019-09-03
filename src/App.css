@@ -36,10 +36,6 @@ body{
   margin-top: 0;
 }
 
-.username{
-  margin-bottom: 10px;
-}
-.viewCount{ margin-top: 0; }
 
 .nav-button{
   display: inline-block;
@@ -54,4 +50,43 @@ body{
 
 .marg1{
     margin: 0 18px;
+}
+
+.stream-link{
+  display: block;
+  text-decoration: none;
+  color: #fff;
+}
+
+.search-field{
+  display: block;
+  width: 350px;
+  padding: 5px;
+  margin: 0 auto;
+  border: 1px solid #4B367C;
+}
+
+.search-form{margin-bottom: 30px;}
+.result-stream{text-align:left; width: 640px; margin: 0 auto;}
+.result-stream-link{display: block;}
+
+.result-profile>a{
+  display: flex;
+  text-decoration: none;
+  color:#fff;
+  width: 600px;
+  margin: 0 auto;
+  align-items:center;
+}
+
+.result-profile img{
+  border-radius:50%;
+  width: 150px; height: 150px;
+  margin-right: 10px;
+}
+
+.result-profile p{margin: 0; font-size: 20px; font-weight: bold;}
+.nomt{ margin-top: 0; }
+.result-stream .nav-button, .result-profile .nav-button{
+  margin-bottom: 20px;
 }
