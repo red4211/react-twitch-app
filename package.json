@@ -1,8 +1,10 @@
 {
-  "name": "warframe-api",
+  "name": "twitch-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://red4211.github.io/react-twitch-app",
   "dependencies": {
+    "gh-pages": "^2.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -12,7 +14,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+     "predeploy": "npm run build",
+ "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
