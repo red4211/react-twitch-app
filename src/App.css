@@ -90,3 +90,7 @@ body{
 .result-stream .nav-button, .result-profile .nav-button{
   margin-bottom: 20px;
 }
+
+.streams-list li.center-text{
+  text-align: center;
+}
