@@ -154,41 +154,41 @@ class App extends Component {
 
 }
 
-class List extends Component {
-    render() {
-        if (this.props.showList) {
-            var list = [];
-            if (typeof this.props.list !== "undefined") {
-                list = this.props.list.map((current, index) => {
-                    var imgUrl = current.thumbnail_url;
-                    imgUrl = imgUrl.replace("{width}", "480");
-                    imgUrl = imgUrl.replace("{height}", "270");
+function List(props) {
+    const renderList = () => {
+    var list = [];
+    if (typeof props.list !== "undefined") {
+        list = props.list.map((current, index) => {
+        var imgUrl = current.thumbnail_url;
+        imgUrl = imgUrl.replace("{width}", "480");
+        imgUrl = imgUrl.replace("{height}", "270");
 
-                    return (
-                        <li key={index}>
-            <a href={"https://www.twitch.tv/"+current.user_name} className="stream-link" target="blank"><img src={imgUrl} /></a>
-            <p className="title">{current.title}</p>
-            <p>{current.user_name}</p>
-            <p>{current.viewer_count} viewers</p>
-            <button className="nav-button" onClick={(e)=>{this.props.showClips(current.user_id, e)}} >Top clips</button>
-          </li>
-                    )
-                })
-            } else {
-                list = <li className="center-text">Nothing here</li>
-            }
+        return (
+            <li key={index}>
+        <a href={"https://www.twitch.tv/"+current.user_name} className="stream-link" target="blank"><img src={imgUrl} alt="thumbnail" /></a>
+        <p className="title">{current.title}</p>
+        <p>{current.user_name}</p>
+        <p>{current.viewer_count} viewers</p>
+        <button className="nav-button" onClick={(e)=>{props.showClips(current.user_id, e)}} >Top clips</button>
+        </li>
+        )
+        })
+    } else {
+        list = <li className="center-text">Nothing here</li>
+    }
 
+    return (
+    <div>
+        <button className="nav-button marg1" onClick={props.showPrev}>Previous</button>
+        <button className="nav-button marg1" onClick={props.hClick} >Next</button>
+        <ul className="streams-list">{list}</ul>
+    </div>)
+    }
+
+    const renderClipsFunc = () => {
+        const clipsList = props.clips.data.map((current, index) => {
             return (
-                <div>
-        <button className="nav-button marg1" onClick={this.props.showPrev}>Previous</button>
-        <button className="nav-button marg1" onClick={this.props.hClick} >Next</button>
-          <ul className="streams-list">{list}</ul>
-        </div>
-            )
-        } else if (this.props.renderClips) { //clips
-            const clipsList = this.props.clips.data.map((current, index) => {
-                return (
-                    <li key={index}>
+                <li key={index}>
               <iframe
                   src={current.embed_url+"&autoplay=false"}
                   height="270"
@@ -197,19 +197,34 @@ class List extends Component {
                   allowfullscreen="true">
               </iframe>
             </li>
-                )
-            })
+            )
+        })
 
-            return (
-                <div>
-          <button className="nav-button" onClick={this.props.returnToList} >Back</button>
+        return (
+            <div>
+          <button className="nav-button" onClick={props.returnToList} >Back</button>
           <ul className="clips-list">{clipsList} </ul>
           </div>
-            )
-        } else {
-            return null;
-        }
+        )
     }
+
+    if (props.showList) {
+        return renderList();
+    } else if (props.renderClips) { //clips
+        return renderClipsFunc();
+    } else {
+        return null;
+    }
+}
+
+List.propTypes = {
+    list: PropTypes.array,
+    hClick: PropTypes.func,
+    showPrev: PropTypes.func,
+    showClips: PropTypes.func,
+    showList: PropTypes.bool,
+    returnToList: PropTypes.func,
+    renderClips: PropTypes.bool
 }
 
 function Search(props) {
@@ -218,6 +233,12 @@ function Search(props) {
         <input type="text" placeholder="Search" onChange={props.propSearch} value={props.searchString} className="search-field" />
       </form>
     )
+}
+
+Search.propTypes = {
+    propSearch: PropTypes.func,
+    searchString: PropTypes.string,
+    runSearch: PropTypes.func
 }
 
 function BroadcasterCard(props) {
@@ -233,7 +254,7 @@ function BroadcasterCard(props) {
             <div className="result-stream" >
           <button onClick={props.backFromSearch} className="nav-button" >Back</button>
           <p className="nomt" >{streamDetails.user_name}</p>
-          <a href={"https://www.twitch.tv/"+streamDetails.user_name} target="blank" className="result-stream-link" ><img src={imgUrl} /></a>
+          <a href={"https://www.twitch.tv/"+streamDetails.user_name} target="blank" className="result-stream-link" ><img src={imgUrl} alt="thumbnail"/></a>
           <p>Category: {props.game}</p>
           <p className="title">{streamDetails.title}</p>
           <p>{streamDetails.viewer_count} viewers</p>
@@ -244,7 +265,7 @@ function BroadcasterCard(props) {
             <div className="result-profile">
           <button onClick={props.backFromSearch} className="nav-button" >Back</button>
           <a href={"https://www.twitch.tv/"+props.profileInfo[0].display_name} target="blank">
-            <img src={props.profileInfo[0].profile_image_url} />
+            <img src={props.profileInfo[0].profile_image_url} alt="profile-pic" />
           <p>{props.profileInfo[0].display_name}</p>
           </a>
         </div>
