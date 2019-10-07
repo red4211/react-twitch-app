@@ -1,11 +1,29 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import {TOGGLECLIPDISPLAY, showNextThunk, showPrevThunk} from "./actions";
 
-function List(props) {
+class List extends Component {
+constructor(){
+    super();
+}
+    returnToList = () => {
+        this.props.dispatch(TOGGLECLIPDISPLAY);
+    };
+
+    showNext = event => {
+        this.props.dispatch(showNextThunk());
+    };
+
+    showPrev = event => {
+       this.props.dispatch(showPrevThunk()) 
+    };
+
+    render(){
     const renderList = () => {
         var list = [];
 
-        list = props.list.map((current, index) => {
+        list = this.props.list.map((current, index) => {
             var imgUrl = current.thumbnail_url;
             imgUrl = imgUrl.replace("{width}", "480");
             imgUrl = imgUrl.replace("{height}", "270");
@@ -25,7 +43,7 @@ function List(props) {
                     <button
                         className="nav-button"
                         onClick={e => {
-                            props.showClips(current.user_id, e);
+                            this.props.showClips(current.user_id);
                         }}
                     >
                         Top clips
@@ -36,10 +54,10 @@ function List(props) {
 
         return (
             <div>
-                <button className="nav-button marg1" onClick={props.showPrev}>
+                <button className="nav-button marg1" onClick={this.showPrev}>
                     Previous
                 </button>
-                <button className="nav-button marg1" onClick={props.hClick}>
+                <button className="nav-button marg1" onClick={this.showNext}>
                     Next
                 </button>
                 <ul className="streams-list">{list}</ul>
@@ -48,7 +66,7 @@ function List(props) {
     };
 
     const renderClipsFunc = () => {
-        const clipsList = props.clips.data.map((current, index) => {
+        const clipsList = this.props.clips.data.map((current, index) => {
             return (
                 <li key={index}>
                     <iframe
@@ -64,7 +82,7 @@ function List(props) {
 
         return (
             <div>
-                <button className="nav-button" onClick={props.returnToList}>
+                <button className="nav-button" onClick={this.returnToList}>
                     Back
                 </button>
                 <ul className="clips-list">{clipsList} </ul>
@@ -72,23 +90,21 @@ function List(props) {
         );
     };
 
-    if (props.showList) {
+    if (this.props.showList) {
         return renderList();
-    } else if (props.renderClips) {
+    } else if (this.props.renderClips) {
         //clips
         return renderClipsFunc();
     } else {
         return null;
     }
+    }
 }
 
 List.propTypes = {
     list: PropTypes.array,
-    hClick: PropTypes.func,
-    showPrev: PropTypes.func,
     showClips: PropTypes.func,
     showList: PropTypes.bool,
-    returnToList: PropTypes.func,
     renderClips: PropTypes.bool
 };
 
@@ -96,4 +112,11 @@ List.defaultProps = {
     list: []
 };
 
-export default List;
+const mapStateToProps = state => ({
+    showList: state.showList,
+    renderClips: state.renderClips,
+    list: state.activeStreams.data,
+    clips: state.clips
+})
+
+export default connect(mapStateToProps)(List);

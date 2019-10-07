@@ -1,18 +1,29 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import {BACKFROMSEARCH} from "./actions";
 
-function BroadcasterCard(props) {
-  if (props.showStreamCard == false) {
+class BroadcasterCard extends Component {
+  constructor(){
+    super();
+  }
+
+  backFromSearch = event => {
+      this.props.dispatch(BACKFROMSEARCH);
+  };
+
+render(){
+if (this.props.showStreamCard == false) {
     return null;
-  } else if (props.streamInfo.length !== 0) {
+  } else if (this.props.streamInfo.length !== 0) {
     //stream online
-    const streamDetails = props.streamInfo[0];
+    const streamDetails = this.props.streamInfo[0];
     var imgUrl = streamDetails.thumbnail_url;
     imgUrl = imgUrl.replace("{width}", "640");
     imgUrl = imgUrl.replace("{height}", "360");
     return (
       <div className="result-stream">
-        <button onClick={props.backFromSearch} className="nav-button">
+        <button onClick={this.backFromSearch} className="nav-button">
           Back
         </button>
         <p className="nomt">{streamDetails.user_name}</p>
@@ -23,36 +34,43 @@ function BroadcasterCard(props) {
         >
           <img src={imgUrl} alt="thumbnail" />
         </a>
-        <p>Category: {props.game}</p>
+        <p>Category: {this.props.game}</p>
         <p className="title">{streamDetails.title}</p>
         <p>{streamDetails.viewer_count} viewers</p>
       </div>
     );
-  } else if (props.profileInfo.length !== 0) {
+  } else if (this.props.profileInfo.length !== 0) {
     return (
       <div className="result-profile">
-        <button onClick={props.backFromSearch} className="nav-button">
+        <button onClick={this.backFromSearch} className="nav-button">
           Back
         </button>
         <a
-          href={"https://www.twitch.tv/" + props.profileInfo[0].display_name}
+          href={"https://www.twitch.tv/" + this.props.profileInfo[0].display_name}
           target="blank"
         >
-          <img src={props.profileInfo[0].profile_image_url} alt="profile-pic" />
-          <p>{props.profileInfo[0].display_name}</p>
+          <img src={this.props.profileInfo[0].profile_image_url} alt="profile-pic" />
+          <p>{this.props.profileInfo[0].display_name}</p>
         </a>
       </div>
     );
   } else {
     return (
       <div>
-        <button onClick={props.backFromSearch} className="nav-button">
+        <button onClick={this.backFromSearch} className="nav-button">
           Back
         </button>
-        <p>User not found</p>{" "}
+        <p>User not found</p>
       </div>
     );
   }
 }
+}
 
-export default BroadcasterCard;
+const mapStateToProps = state=>({
+  showStreamCard: state.showStreamCard,
+  game: state.gameName,
+  streamInfo: state.resultStream,
+  profileInfo: state.resultProfile
+})
+export default connect(mapStateToProps)(BroadcasterCard);
