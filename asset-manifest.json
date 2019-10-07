@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/react-twitch-app/static/css/main.ead385ad.chunk.css",
-    "main.js": "/react-twitch-app/static/js/main.f59ca778.chunk.js",
-    "main.js.map": "/react-twitch-app/static/js/main.f59ca778.chunk.js.map",
+    "main.js": "/react-twitch-app/static/js/main.eed344c8.chunk.js",
+    "main.js.map": "/react-twitch-app/static/js/main.eed344c8.chunk.js.map",
     "runtime~main.js": "/react-twitch-app/static/js/runtime~main.dbcd0335.js",
     "runtime~main.js.map": "/react-twitch-app/static/js/runtime~main.dbcd0335.js.map",
-    "static/js/2.b6ee9460.chunk.js": "/react-twitch-app/static/js/2.b6ee9460.chunk.js",
-    "static/js/2.b6ee9460.chunk.js.map": "/react-twitch-app/static/js/2.b6ee9460.chunk.js.map",
+    "static/js/2.6c265996.chunk.js": "/react-twitch-app/static/js/2.6c265996.chunk.js",
+    "static/js/2.6c265996.chunk.js.map": "/react-twitch-app/static/js/2.6c265996.chunk.js.map",
     "index.html": "/react-twitch-app/index.html",
-    "precache-manifest.d824e42f8113cfe0cb9298db84e4285c.js": "/react-twitch-app/precache-manifest.d824e42f8113cfe0cb9298db84e4285c.js",
+    "precache-manifest.84eea0107b9a4594bd93674c7b6b8b16.js": "/react-twitch-app/precache-manifest.84eea0107b9a4594bd93674c7b6b8b16.js",
     "service-worker.js": "/react-twitch-app/service-worker.js",
     "static/css/main.ead385ad.chunk.css.map": "/react-twitch-app/static/css/main.ead385ad.chunk.css.map"
   }
